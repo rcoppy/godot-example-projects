@@ -1,10 +1,5 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var hspeed = 128 # px / s^2
 var vspeed = 32
 var gravity = 128 # px / s^2
@@ -21,13 +16,6 @@ var is_grounded := false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	y_origin = position.y
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 
 func _physics_process(delta):
 	
