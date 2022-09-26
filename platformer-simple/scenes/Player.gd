@@ -45,9 +45,11 @@ func _physics_process(delta):
 	
 	velocity.x = clamp(velocity.x, -1 * hmax, hmax)
 	
+	# horizontal friction
 	if !is_move_pressed && is_grounded: 
 		velocity.x *= 1.0 - hdamping
 	
+	# account for terrain collisions
 	velocity = move_and_slide(velocity)
 	
 	position += velocity * delta
@@ -63,6 +65,7 @@ func _physics_process(delta):
 				print("I collided with ", collision.collider.name)
 				is_grounded = true
 		
+		# show the height of the jump at max of its arc
 		if !is_grounded && abs(velocity.y) <= 1: 
 			print_debug(position.y - y_origin)
 	
@@ -78,6 +81,7 @@ func get_jump_impulse():
 	
 	var t_flight := sqrt(2 * h / g)
 
+	# there's something I'm not understanding--shouldn't need magic number
 	var v0: float = h / t_flight + 0.2175 * g * t_flight # 0.25 was 0.5 previously; still not sure why off by factor of 2
 	
 	return v0
